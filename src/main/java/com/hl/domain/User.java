@@ -63,6 +63,25 @@ public class User
     public void setUserPassword(String userPassword)
     {
         this.userPassword = userPassword;
+    }
+    /* (non Javadoc) 
+     * @Title: toString
+     * @Description: TODO
+     * @return 
+     * @see java.lang.Object#toString() 
+     */
+    @Override
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append("User [userId=")
+            .append(userId)
+            .append(", userName=")
+            .append(userName)
+            .append(", userPassword=")
+            .append(userPassword)
+            .append("]");
+        return builder.toString();
     }  
 
 
