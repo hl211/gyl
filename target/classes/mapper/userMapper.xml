@@ -12,4 +12,16 @@
     <select id="selectUserById" parameterType="int" resultMap="BaseResultMap">
         SELECT * FROM t_user WHERE USER_ID = #{userId}
     </select>
+    
+    <!-- 分页查询 -->
+    <select id="selectUserByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT *
+		FROM t_user
+		WHERE 1 = 1
+		<if test="userName != null and userName !=''">
+		    AND USER_NAME = #{userName,jdbcType=VARCHAR}
+		</if>
+		ORDER BY USER_ID
+	</select>
+    
 </mapper>

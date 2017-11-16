@@ -11,6 +11,10 @@
  */
 package com.hl.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.hl.domain.User;
 
 /** 
@@ -26,6 +30,16 @@ public interface UserDao
      * @return User
      */
     public User selectUserById(Integer userId);  
+    
+    
+    /**
+     * 
+     * @author hl
+     * @since  2017年11月16日 
+     * @param userName
+     * @return
+     */
+    List<User> selectUserByUserName(@Param("userName") String userName);
 
 
 }
