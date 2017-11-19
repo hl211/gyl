@@ -20,7 +20,7 @@ import com.hl.util.PagedResult;
  * @author: hl
  * @date: 2017年10月24日 下午9:16:06
  */
-public interface UserService
+public interface IUserService
 {
     User selectUserById(Integer userId);
     

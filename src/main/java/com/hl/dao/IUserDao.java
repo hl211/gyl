@@ -23,7 +23,7 @@ import com.hl.domain.User;
  * @author: hl
  * @date: 2017年10月24日 下午9:15:27  
  */
-public interface UserDao
+public interface IUserDao
 {
     /**
      * @param userId
@@ -40,6 +40,7 @@ public interface UserDao
      * @return
      */
     List<User> selectUserByUserName(@Param("userName") String userName);
+    
 
 
 }

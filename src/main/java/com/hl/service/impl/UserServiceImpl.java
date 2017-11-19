@@ -9,14 +9,15 @@
  * @date: 2017年10月24日 下午9:17:30 
  * @version: V1.0   
  */
-package com.hl.service;
+package com.hl.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
-import com.hl.dao.UserDao;
+import com.hl.dao.IUserDao;
 import com.hl.domain.User;
+import com.hl.service.IUserService;
 import com.hl.util.BeanUtil;
 import com.hl.util.PagedResult;
 
@@ -28,10 +29,10 @@ import com.hl.util.PagedResult;
  */
 
 @Service 
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
 
     @Autowired  
-    private UserDao userDao;  
+    private IUserDao userDao;  
 
     public User selectUserById(Integer userId) {  
         return userDao.selectUserById(userId);  

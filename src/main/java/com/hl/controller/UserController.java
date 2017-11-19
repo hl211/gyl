@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.hl.domain.User;
-import com.hl.service.UserService;
+import com.hl.service.IUserService;
 /** 
  * @ClassName: UserController 
  * @Description: TODO
@@ -36,7 +36,7 @@ public class UserController
     
     @Resource 
     //@Autowired
-    private UserService userService;  
+    private IUserService userService;  
 
     @RequestMapping("/")    
     public ModelAndView getIndex(){      

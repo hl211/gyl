@@ -24,7 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.alibaba.fastjson.JSON;
 import com.hl.controller.UserController;
 import com.hl.domain.User;
-import com.hl.service.UserService;
+import com.hl.service.IUserService;
 import com.hl.util.PagedResult;
 
 /**
@@ -44,7 +44,7 @@ public class SpringLinkDataBaseTestCase extends AbstractJUnit4SpringContextTests
     
     @Resource
     // @Autowired
-    private UserService userService;
+    private IUserService userService;
     
     @Test
     public void selectUserByIdTest()
