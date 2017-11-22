@@ -17,11 +17,11 @@ import org.apache.ibatis.annotations.Param;
 
 import com.hl.domain.User;
 
-/** 
- * @ClassName: UserDao 
+/**
+ * @ClassName: UserDao
  * @Description: TODO
  * @author: hl
- * @date: 2017年10月24日 下午9:15:27  
+ * @date: 2017年10月24日 下午9:15:27
  */
 public interface IUserDao
 {
@@ -29,18 +29,30 @@ public interface IUserDao
      * @param userId
      * @return User
      */
-    public User selectUserById(Integer userId);  
+    public User selectByPrimaryKey(Integer userId);
     
+    List<User> selectUserEntry();
     
     /**
      * 
      * @author hl
-     * @since  2017年11月16日 
+     * @since 2017年11月16日
      * @param userName
      * @return
      */
     List<User> selectUserByUserName(@Param("userName") String userName);
     
-
-
+    List<User> selectEntryByWhere(User user);
+    
+    int insertEntry(User user);
+    
+    int insertEntryBatch(List<User> list);
+    
+    int deleteByPrimaryKeyBatch(List<User> list);
+    
+    List<User> selectEntryAll();
+    
+    List<User> selectEntryAllSort(@Param("orderField") String orderField,
+        @Param("orderDirection") String orderDirection);
+    
 }

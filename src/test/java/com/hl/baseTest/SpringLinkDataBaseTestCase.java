@@ -11,6 +11,9 @@
  */
 package com.hl.baseTest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -49,16 +52,102 @@ public class SpringLinkDataBaseTestCase extends AbstractJUnit4SpringContextTests
     @Test
     public void selectUserByIdTest()
     {
-        User user = userService.selectUserById(1);
+        User user = userService.selectByPrimaryKey(1);
         System.out.println(JSON.toJSONString(user));
         
     }
     
+
+   
+    
     @Test
-    public void queryByPage()
+    public void queryUserByWhere()
     {
-        PagedResult<User> pagedResult = userService.queryByPage(null, 1, 10);
-        logger.info("查找结果" + pagedResult);
-        System.out.println(pagedResult);
+        User u = new User();
+        
+        u.setUserName("hl");
+        
+        PagedResult<User> pagedResult = userService.queryUserBywhere(u, 1, 10);
+        System.out.println(pagedResult.getTotal());
+    }
+    
+    @Test
+    public void insertEntry()
+    {
+        User u = new User();
+        u.setUserName("hl111");
+        u.setUserPassword("dd");
+        System.out.println(u.getUserId());
+        System.out.println(userService.insertEntry(u));
+        System.out.println(u.getUserId());
+    }
+    
+    @Test
+    public void insertEntryBatch() {
+        List<User> list=new ArrayList<User>();
+        for (int i = 0; i < 10; i++)
+        {
+            User u = new User();
+            u.setUserName("hl"+i);
+         
+            u.setUserPassword("123"+i);
+            
+            list.add(u);
+        }
+        try
+        {
+            System.out.println(userService.insertEntryBatch(list));
+        }
+        catch (Exception e)
+        {
+            // TODO: handle exception
+          System.out.println("插入失败"+e.getCause());
+        }
+        
+        for (User user : list)
+        {
+            System.out.println(user);
+        }
+        
+    }
+    
+    @Test
+    public void deleteByPrimaryKeyBatch() {
+        List l=new ArrayList();
+        for (int i = 0; i < 5; i++)
+        {
+            l.add(i);
+        }
+        
+        try
+        {
+            System.out.println(userService.deleteByPrimaryKeyBatch(l));
+        }
+        catch (Exception e)
+        {
+            // TODO Auto-generated catch block
+            System.out.println(e.getCause());
+        }
+    }
+    @Test
+    public void selectEntryAll() {
+        PagedResult<User> pagedResult = userService.selectEntryAll(1, 30);
+        for (User iterable_element : pagedResult.getDataList())
+        {
+            System.out.println(iterable_element);
+        }
+        
+        System.out.println(pagedResult.getTotal());
+    }
+    
+    @Test
+    public void selectEntryAllSort() {
+        PagedResult<User> pagedResult = userService.selectEntryAllSort(1, 30, "USER_NAME", "DESC");
+        for (User iterable_element : pagedResult.getDataList())
+        {
+            System.out.println(iterable_element);
+        }
+        
+        System.out.println(pagedResult.getTotal());
     }
 }

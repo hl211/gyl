@@ -41,7 +41,7 @@ public class UserController
     @RequestMapping("/")    
     public ModelAndView getIndex(){      
         ModelAndView mav = new ModelAndView("index");   
-        User user = userService.selectUserById(1);  
+        User user = userService.selectByPrimaryKey(1);  
         mav.addObject("user", user);  
         logger.info("测试：{}", "输出日志"); 
         return mav;    
@@ -50,7 +50,7 @@ public class UserController
     @RequestMapping("/user")   
     public @ResponseBody User getuser(User u){  
         System.out.println(u);
-        User user = userService.selectUserById(1);     
+        User user = userService.selectByPrimaryKey(1);     
         //logger.info("测试：{}", "输出日志"); 
         return user;    
     }

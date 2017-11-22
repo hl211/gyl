@@ -11,6 +11,10 @@
  */
 package com.hl.service;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.hl.domain.User;
 import com.hl.util.PagedResult;
 
@@ -22,7 +26,7 @@ import com.hl.util.PagedResult;
  */
 public interface IUserService
 {
-    User selectUserById(Integer userId);
+    User selectByPrimaryKey(Integer userId);
     
     /**
      * 
@@ -33,6 +37,18 @@ public interface IUserService
      * @param pageSize 查询条件，可为空，默认取10
      * @return
      */
-    PagedResult<User> queryByPage(String userName, Integer pageNo, Integer pageSize);
+  
+    
+    PagedResult<User> queryUserBywhere(User user, Integer pageNo, Integer pageSize);
+    
+    int insertEntry(User user);
+    
+    int insertEntryBatch(List<User> list);
+    
+    int deleteByPrimaryKeyBatch(List<User> list);
+    
+    PagedResult<User> selectEntryAll(Integer pageNo, Integer pageSize);
+    
+    PagedResult<User> selectEntryAllSort(Integer pageNo, Integer pageSize, String orderField, String orderDirection);
     
 }

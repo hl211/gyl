@@ -2,28 +2,122 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hl.dao.IUserDao">
-<!--设置domain类和数据库中表的字段一一对应，注意数据库字段和domain类中的字段名称不致，此处一定要！-->
-    <resultMap id="BaseResultMap" type="com.hl.domain.User">
-        <id column="USER_ID" property="userId" jdbcType="INTEGER" />
-        <result column="USER_NAME" property="userName" jdbcType="CHAR" />
-        <result column="USER_PASSWORD" property="userPassword" jdbcType="CHAR" />
-    </resultMap>
-    <!-- 查询单条记录 -->
-    <select id="selectUserById" parameterType="int" resultMap="BaseResultMap">
-        SELECT * FROM t_user WHERE USER_ID = #{userId}
-    </select>
-    
-    <!-- 分页查询 -->
-    <select id="selectUserByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
-		SELECT *
-		FROM t_user
-		WHERE 1 = 1
-		<if test="userName != null and userName !=''">
-		    AND USER_NAME = #{userName,jdbcType=VARCHAR}
-		</if>
-		ORDER BY USER_ID
+
+	<!--设置domain类和数据库中表的字段一一对应，注意数据库字段和domain类中的字段名称不致，此处一定要！ -->
+	<resultMap id="BaseResultMap" type="com.hl.domain.User">
+		<id column="USER_ID" property="userId" jdbcType="INTEGER" />
+		<result column="USER_NAME" property="userName" jdbcType="CHAR" />
+		<result column="USER_PASSWORD" property="userPassword"
+			jdbcType="CHAR" />
+	</resultMap>
+
+	<!-- 设置表列项 -->
+	<sql id="Column_List">
+		USER_ID, USER_NAME, USER_PASSWORD
+	</sql>
+
+	<sql id="Where_Clause">
+		<where>
+			<if test="userId != null and userId !=''">
+				USER_ID = #{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="userName != null and userName !=''">
+				AND USER_NAME = #{userName,jdbcType=VARCHAR}
+			</if>
+			<if test="userPassword != null and userPassword !=''">
+				AND USER_PASSWORD = #{userPassword,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="Update_Set">
+		<set>
+			<if test="userName != null and userName!=''">
+				USER_NAME = #{userName,jdbcType=CHAR},
+			</if>
+			<if test="userPassword != null and userPassword !=''">
+				USER_PASSWORD = #{userPassword,jdbcType=CHAR},
+			</if>
+		</set>
+	</sql>
+
+	<!--查询语句 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Column_List" />
+		from t_user
+		where USER_ID = #{userId,jdbcType=INTEGER}
 	</select>
-	
-	
-    
+	<select id="selectEntryByWhere" parameterType="com.hl.domain.User"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Column_List" />
+		FROM t_user
+		<include refid="Where_Clause" />
+	</select>
+
+	<select id="selectEntryAll" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Column_List" />
+		FROM t_user
+		order by USER_NAME
+	</select>
+
+	<select id="selectEntryAllSort" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Column_List" />
+		FROM t_user
+		<if test="orderField!=null and orderField !=''">
+			order by ${orderField} ${orderDirection}
+		</if>
+	</select>
+
+	<!--插入语句 -->
+	<insert id="insertEntry" parameterType="com.hl.domain.User"
+		useGeneratedKeys="true" keyProperty="userId">
+		insert into t_user (USER_ID,
+		USER_NAME, USER_PASSWORD)
+		values
+		(#{userId,jdbcType=INTEGER},
+		#{userName,jdbcType=CHAR},
+		#{userPassword,jdbcType=CHAR}
+		)
+	</insert>
+	<insert id="insertEntryBatch" parameterType="java.util.List"
+		useGeneratedKeys="true" keyProperty="userId">
+		insert into t_user (USER_ID, USER_NAME, USER_PASSWORD)
+		values
+		<foreach collection="list" index="index" item="u" separator=",">
+			(
+			#{u.userId}, #{u.userName}, #{u.userPassword}
+			)
+		</foreach>
+	</insert>
+	<!--修改语句 -->
+	<update id="updateEntryByPrimaryKey" parameterType="com.hl.domain.User">
+		update t_user
+		<include refid="Update_Set" />
+		where USER_ID = #{userId,jdbcType=INTEGER}
+	</update>
+
+	<!--删除语句 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from t_user
+		where USER_ID = #{userId,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByWhere" parameterType="com.hl.domain.User">
+		delete from t_user
+		<include refid="Where_Clause" />
+	</delete>
+	<delete id="deleteByPrimaryKeyBatch" parameterType="java.util.List">
+		delete from t_user
+		where USER_ID in
+		<foreach collection="list" item="id" separator="," open="("
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+
 </mapper>
