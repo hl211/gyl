@@ -1,5 +1,2 @@
-com\hl\service\UserService.class
-com\hl\dao\UserDao.class
 com\hl\controller\UserController.class
 com\hl\domain\User.class
-com\hl\service\UserServiceImpl.class

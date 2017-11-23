@@ -1,5 +1,10 @@
-C:\eclipse-workspace\gyl\src\main\java\com\hl\dao\UserDao.java
+C:\eclipse-workspace\gyl\src\main\java\com\hl\util\BaseEntity.java
+C:\eclipse-workspace\gyl\src\main\java\com\hl\util\VerifyUtil.java
 C:\eclipse-workspace\gyl\src\main\java\com\hl\controller\UserController.java
-C:\eclipse-workspace\gyl\src\main\java\com\hl\service\UserService.java
+C:\eclipse-workspace\gyl\src\main\java\com\hl\common\HttpConstants.java
+C:\eclipse-workspace\gyl\src\main\java\com\hl\service\impl\UserServiceImpl.java
+C:\eclipse-workspace\gyl\src\main\java\com\hl\service\IUserService.java
+C:\eclipse-workspace\gyl\src\main\java\com\hl\util\BeanUtil.java
+C:\eclipse-workspace\gyl\src\main\java\com\hl\util\PagedResult.java
+C:\eclipse-workspace\gyl\src\main\java\com\hl\dao\IUserDao.java
 C:\eclipse-workspace\gyl\src\main\java\com\hl\domain\User.java
-C:\eclipse-workspace\gyl\src\main\java\com\hl\service\UserServiceImpl.java
