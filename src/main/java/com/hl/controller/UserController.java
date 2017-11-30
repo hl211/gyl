@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.hl.domain.User;
 import com.hl.service.IUserService;
+import com.hl.util.PagedResult;
+import com.mysql.jdbc.BalanceStrategy;
 /** 
  * @ClassName: UserController 
  * @Description: TODO
@@ -30,7 +32,7 @@ import com.hl.service.IUserService;
  */
 
 @Controller  
-public class UserController
+public class UserController extends BaseController
 {
     private  final static Logger logger = LoggerFactory.getLogger(UserController.class);
     
@@ -48,11 +50,11 @@ public class UserController
     }    
     
     @RequestMapping("/user")   
-    public @ResponseBody User getuser(User u){  
+    public @ResponseBody String getuser(User u){  
         System.out.println(u);
-        User user = userService.selectByPrimaryKey(1);     
-        //logger.info("测试：{}", "输出日志"); 
-        return user;    
+        PagedResult<User> user = userService.selectEntryByWhere(u, null, null);     
+        logger.info("测试：{}", "输出日志"); 
+        return returnSuccess(user);    
     }
 
 }

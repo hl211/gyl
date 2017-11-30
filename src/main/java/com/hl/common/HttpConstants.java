@@ -46,6 +46,4 @@ public class HttpConstants
     
     public static final String OPERATION_TYPE_DELETE = "D";
     
-    public static final String ENUM_PATH = "com.mucfc.msm.enumeration.";
-    
 }

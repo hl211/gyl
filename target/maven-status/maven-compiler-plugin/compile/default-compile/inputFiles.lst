@@ -2,6 +2,8 @@ C:\eclipse-workspace\gyl\src\main\java\com\hl\util\BaseEntity.java
 C:\eclipse-workspace\gyl\src\main\java\com\hl\util\VerifyUtil.java
 C:\eclipse-workspace\gyl\src\main\java\com\hl\controller\UserController.java
 C:\eclipse-workspace\gyl\src\main\java\com\hl\common\HttpConstants.java
+C:\eclipse-workspace\gyl\src\main\java\com\hl\controller\BaseController.java
+C:\eclipse-workspace\gyl\src\main\java\com\hl\common\PageResultPojo.java
 C:\eclipse-workspace\gyl\src\main\java\com\hl\service\impl\UserServiceImpl.java
 C:\eclipse-workspace\gyl\src\main\java\com\hl\service\IUserService.java
 C:\eclipse-workspace\gyl\src\main\java\com\hl\util\BeanUtil.java

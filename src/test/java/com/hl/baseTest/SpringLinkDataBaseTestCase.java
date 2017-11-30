@@ -50,24 +50,43 @@ public class SpringLinkDataBaseTestCase extends AbstractJUnit4SpringContextTests
     private IUserService userService;
     
     @Test
-    public void selectUserByIdTest()
+    public void selectUserById()
     {
         User user = userService.selectByPrimaryKey(1);
         System.out.println(JSON.toJSONString(user));
         
     }
     
-
-   
-    
     @Test
-    public void queryUserByWhere()
+    public void selectEntryByWhere()
     {
         User u = new User();
         
         u.setUserName("hl");
         
-        PagedResult<User> pagedResult = userService.queryUserBywhere(u, 1, 10);
+        PagedResult<User> pagedResult = userService.selectEntryByWhere(u, 1, 10);
+        System.out.println(pagedResult.getTotal());
+    }
+    
+    @Test
+    public void selectEntryAll() {
+        PagedResult<User> pagedResult = userService.selectEntryAll(1, 30);
+        for (User iterable_element : pagedResult.getDataList())
+        {
+            System.out.println(iterable_element);
+        }
+        
+        System.out.println(pagedResult.getTotal());
+    }
+    
+    @Test
+    public void selectEntryAllSort() {
+        PagedResult<User> pagedResult = userService.selectEntryAllSort(1, 30, "USER_NAME", "DESC");
+        for (User iterable_element : pagedResult.getDataList())
+        {
+            System.out.println(iterable_element);
+        }
+        
         System.out.println(pagedResult.getTotal());
     }
     
@@ -85,12 +104,12 @@ public class SpringLinkDataBaseTestCase extends AbstractJUnit4SpringContextTests
     @Test
     public void insertEntryBatch() {
         List<User> list=new ArrayList<User>();
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 50; i++)
         {
             User u = new User();
             u.setUserName("hl"+i);
          
-            u.setUserPassword("123"+i);
+            u.setUserPassword("123");
             
             list.add(u);
         }
@@ -129,25 +148,5 @@ public class SpringLinkDataBaseTestCase extends AbstractJUnit4SpringContextTests
             System.out.println(e.getCause());
         }
     }
-    @Test
-    public void selectEntryAll() {
-        PagedResult<User> pagedResult = userService.selectEntryAll(1, 30);
-        for (User iterable_element : pagedResult.getDataList())
-        {
-            System.out.println(iterable_element);
-        }
-        
-        System.out.println(pagedResult.getTotal());
-    }
-    
-    @Test
-    public void selectEntryAllSort() {
-        PagedResult<User> pagedResult = userService.selectEntryAllSort(1, 30, "USER_NAME", "DESC");
-        for (User iterable_element : pagedResult.getDataList())
-        {
-            System.out.println(iterable_element);
-        }
-        
-        System.out.println(pagedResult.getTotal());
-    }
+
 }
